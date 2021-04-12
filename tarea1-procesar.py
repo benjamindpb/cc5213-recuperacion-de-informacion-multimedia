@@ -1,4 +1,3 @@
-# /usr/bin/python3.7
 import sys
 import os.path
 import cv2
@@ -22,27 +21,29 @@ if not os.path.isdir(datos):
 
 # calcular descriptores (histogramas)
 
-img1 = cv2.imread(dataset_r + os.listdir(dataset_r)[542], cv2.IMREAD_GRAYSCALE) # or just 0
-
-print(img1.shape)
-
-cv2.imshow(os.listdir(dataset_r)[542], img1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-# img2 = cv2.imread(dataset_r + os.listdir(dataset_r)[67], cv2.IMREAD_GRAYSCALE) # or just 0
-
-# hist1 = cv2.calcHist(img1, [0], None, [32], [0,256])
-# hist2 = cv2.calcHist(img2, [0], None, [32], [0,256])
-# print(cv2.compareHist(hist1, hist2, cv2.HISTCMP_CHISQR))
-
-# images_folder = os.listdir(dataset_r)
+images_folder = os.listdir(dataset_r)
+dict_images = {}
 
 # # primero se itera en la carpeta que contiene las imagenes originales
-# for image_path in images_folder:
-#     # se lee la imagen
-#     img = cv2.imread(dataset_r + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
-    
-#     hist = cv2.calcHist(img, [0], None, [32], [0,256])
+for image_path in images_folder:
+    # se lee la imagen es escala de grises
+    img = cv2.imread(dataset_r + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
+    height, width = img.shape # se obtienen las dimensiones de la imagen
+
+    # # se procede a calcular 4
+    imgs = [0]*4
+    hist = [0]*4
+    for i in range(4):
+        imgs[i] = img[(height//4)*i:(height//4)*(i+1),:]
+
+    for i in range(4):
+        hist[i] = cv2.calcHist(imgs[i], [0], None, [4], [0,256]) # 32 - 64
+        
+
+    dict_images[image_path] = hist
+
+
+
 
     
     
