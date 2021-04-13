@@ -15,17 +15,17 @@ opencv, numpy, pickle
 ## Forma de compilación
 Esta tarea utiliza Python 3.8.3 y opencv 4.5.1.48.
 Para compilar el codigo primero se debe ejecutar el siguiente comando:
-
+```console
 python tarea1-procesar.py [dir_imágenes_R] [datos_R]
-
+```
 donde [dir_imagenes_R] es el directorio donde se encuentran las imagenes reales y [datos_R] es donde se va a guardar la información del procesamiento. Luego se debe ejecutar:
-
+```console
 python tarea1-buscar.py [dir_imágenes_Q] [datos_R] [resultados.txt]
-
+```
 donde [dir_imágenes_Q] es el directorio donde se encuentran las imagenes de consulta y [resultados.tyt] es un archivo de texto en donde se van a guardar los resultados obtenidos de la busqueda. 
 Finalmente para ejecutar los test y ver los resultados se debe ejecutar:
-
+```console
 python tarea1-test.py
-
+```
 ## Resultados Obtenidos
 Para los tres dataset los resultados fueron bastante similares. Los puntos más altos de la busqueda fueron para los tipos de query **Q-QUALITY** y obviamente **F-FLIP**, obteniendo casi el 100% de aciertos. En cambio el tipo de query que obtuvo la puntuación más baja fue **G-GAMMA**. En general se obtuvo un logro de un 70% de aciertos en la busqueda de imagenes.
