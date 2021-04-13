@@ -19,17 +19,18 @@ if not os.path.isdir(dataset_q):
 if not os.path.isdir(datos):
     print("no existe directorio {}".format(datos))
     sys.exit(1)
-
 '''
     Se abre el fichero binario que fue calculado en el procesamiento
     de las imagenes para utilizar su informacion.
 '''
 fichero = open("datos_R/dict_images_r", "rb")
-dict_images_r = pickle.load(fichero) # se cargan los datos
+# Se cargan los datos obtenidos del procesamiento de las imagenes R
+dict_images_r = pickle.load(fichero) 
 
+# Diccionario que almacenara los descriptores de las imagenes de Q
 dict_images_q = {}
 
-# Procesamiento de las imagenes de consulta
+# Procesamiento de las imagenes de consulta Q
 for image_path in os.listdir(dataset_q):
     img = cv2.imread(dataset_q + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
     # se obtienen las dimensiones de la imagen
@@ -48,15 +49,16 @@ for image_path in os.listdir(dataset_q):
     dict_images_q[image_path] = hist
 
 '''
-    Una vez que se calculan los descriptores de las imagenes de Q se procede a realizar la busqueda
+    Una vez que se calculan los descriptores de las imagenes de Q 
+    se procede a realizar la busqueda
 '''
 # Busqueda
-
 lista_resultados = [] # lista que almacenara los resultados
 for k1 in dict_images_q:
     h1 = dict_images_q[k1]
     '''
-        Diccionario que almacenara las distancias de las imagenes reales con respecto a a la imagen de consulta
+        Diccionario que almacenara las distancias de las imagenes 
+        reales con respecto a a la imagen de consulta
     '''
     D = {}
     for k2 in dict_images_r:
@@ -73,13 +75,15 @@ for k1 in dict_images_q:
         dist = cv2.compareHist(h1,h2, cv2.HISTCMP_CHISQR_ALT)
         D[k2] = dist
     min_key = min(D, key=D.get) # Llave del valor minimo del dict
+    # [nombre_imgQ, nombre_imgR, distancia]
     lista_resultados.append([k1, min_key, D[min_key]])
 
-# Escribir en resultados
-
 # Se crea el archivo que contendrá los resultados
-res = open(resultados, "w+")
+res = open(resultados, "w+") # modo escritura
 
-for i in range(len(lista_resultados)):
-    img1, img2, dist = lista_resultados[i]
+# Se escriben los resultados en el archivo de texto
+for r in lista_resultados:
+    img1, img2, dist = r
     res.write(f"{img1} \t {img2} \t {dist}\n")
+
+res.close()
