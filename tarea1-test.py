@@ -33,8 +33,8 @@ def ejecutar_comandos(dataset_q, dataset_r, datos, resultados, filename_gt):
 
 
 def ejecutar_dataset(nombre):
-    dataset_q = "{}/imagenes_q".format(nombre)
-    dataset_r = "{}/imagenes_r".format(nombre)
+    dataset_q = "{}/imagenes_q/".format(nombre)
+    dataset_r = "{}/imagenes_r/".format(nombre)
     filename_gt = "{}/gt.txt".format(nombre)
     datos = "datos_{}".format(nombre)
     resultados = "resultados_{}.txt".format(nombre)
