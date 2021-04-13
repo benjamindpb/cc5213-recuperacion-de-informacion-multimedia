@@ -20,19 +20,19 @@ if not os.path.isdir(datos):
     print("creando directorio {}".format(datos))
     os.mkdir(datos)
 
-# Diccionario que almacenara los descriptores de las imagenes
+# Diccionario que almacenara los descriptores de las imagenes de R
 dict_images_r = {}
 
-# Procesamiento de las imagenes reales
+# Procesamiento de las imagenes reales R
 for image_path in os.listdir(dataset_r):
     img = cv2.imread(dataset_r + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
     # se obtienen las dimensiones de la imagen
     height, width = img.shape
     '''
-        Se divide horizontalmente la imagen original en 4 imagenes. A cada
+        Se divide horizontalmente la imagen original en 5 imagenes. A cada
         una de estas imagenes se le calcula su respectivo histograma para luego
-        agregar al diccionario el path de la imagen con sus respectivos 
-        histogramas.
+        agregar al diccionario el path de la imagen con su respectivo vector
+        de histogramas.
     '''
     imgs = [0]*5
     hist = np.empty(0, dtype="float32")
