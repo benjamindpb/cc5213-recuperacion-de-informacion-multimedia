@@ -23,8 +23,7 @@ if not os.path.isdir(datos):
 # Diccionario que almacenara los descriptores de las imagenes
 dict_images_r = {}
 
-# Se itera en la carpeta que contiene las imagenes
-# print("Comienza el procesamiento de R...")
+# Procesamiento de las imagenes reales
 for image_path in os.listdir(dataset_r):
     img = cv2.imread(dataset_r + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
     # se obtienen las dimensiones de la imagen
@@ -42,7 +41,6 @@ for image_path in os.listdir(dataset_r):
         h = cv2.calcHist(imgs[i], [0], None, [64], [0,256])
         hist = np.append(hist,h)
     dict_images_r[image_path] = hist
-# print("Fin del procesamiento de R.")
 
 '''
     Ahora que se tiene el dict con las imagenes y sus descriptores,
@@ -50,11 +48,8 @@ for image_path in os.listdir(dataset_r):
     para poder utilizar su contenido en el archivo de busqueda.
     Para llevar a cabo esto se utiliza la libreria *pickle*.
 '''
-
-# print("Creación del fichero binario...")
 fichero_binario = open("datos_R/dict_images_r", "wb") # se crea el fichero
 # Se "vuelca" la informacion del diccionario en el fichero
 pickle.dump(dict_images_r, fichero_binario)
-# print("Creación concluida.")
 
 fichero_binario.close() # Cerramos el fichero

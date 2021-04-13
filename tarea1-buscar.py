@@ -24,13 +24,12 @@ if not os.path.isdir(datos):
     Se abre el fichero binario que fue calculado en el procesamiento
     de las imagenes para utilizar su informacion.
 '''
-# print("Se lee fichero binario externo.")
 fichero = open("datos_R/dict_images_r", "rb")
 dict_images_r = pickle.load(fichero) # se cargan los datos
 
 dict_images_q = {}
 
-# print("Comienza el procesamiento de Q...")
+# Procesamiento de las imagenes de consulta
 for image_path in os.listdir(dataset_q):
     img = cv2.imread(dataset_q + image_path, cv2.IMREAD_GRAYSCALE) # or just 0
     # se obtienen las dimensiones de la imagen
@@ -38,6 +37,7 @@ for image_path in os.listdir(dataset_q):
     '''
         Para calcular los descriptores de las imagenes de Q se hace
         lo mismo que se hizo en el procesamiento de las imagenes de R
+        en tarea1-procesar.py
     '''
     imgs = [0]*5
     hist = np.empty(0, dtype="float32")
@@ -46,15 +46,18 @@ for image_path in os.listdir(dataset_q):
         h = cv2.calcHist(imgs[i], [0], None, [64], [0,256])
         hist = np.append(hist,h)
     dict_images_q[image_path] = hist
-# print("Fin del procesamiento de Q.")
 
 '''
     Una vez que se calculan los descriptores de las imagenes de Q se procede a realizar la busqueda
 '''
-# print("Comienza la busqueda...")
-L = []
+# Busqueda
+
+lista_resultados = [] # lista que almacenara los resultados
 for k1 in dict_images_q:
     h1 = dict_images_q[k1]
+    '''
+        Diccionario que almacenara las distancias de las imagenes reales con respecto a a la imagen de consulta
+    '''
     D = {}
     for k2 in dict_images_r:
         h2 = dict_images_r[k2]
@@ -64,16 +67,19 @@ for k1 in dict_images_q:
             - HISTCMP_BHATTACHARYYA (65%-64%-65% -> ~6)
             - HISTCMP_CHISQR_ALT (67%-67%-68% -> ~6.3)
 
+            Se decide usar el método de CHISQR_ALT ya que fue 
+            el que mejores resultados obtuvo.
         '''
         dist = cv2.compareHist(h1,h2, cv2.HISTCMP_CHISQR_ALT)
         D[k2] = dist
-    min_key = min(D, key=D.get)
-    L.append([k1, min_key, D[min_key]])
+    min_key = min(D, key=D.get) # Llave del valor minimo del dict
+    lista_resultados.append([k1, min_key, D[min_key]])
 
 # Escribir en resultados
 
+# Se crea el archivo que contendrá los resultados
 res = open(resultados, "w+")
 
-for i in range(len(L)):
-    img1, img2, dist = L[i]
+for i in range(len(lista_resultados)):
+    img1, img2, dist = lista_resultados[i]
     res.write(f"{img1} \t {img2} \t {dist}\n")
