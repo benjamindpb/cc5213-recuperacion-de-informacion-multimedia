@@ -23,7 +23,8 @@ if not os.path.isdir(datos):
     Se abre el fichero binario que fue calculado en el procesamiento
     de las imagenes para utilizar su informacion.
 '''
-fichero = open("datos_R/dict_images_r", "rb")
+# fichero = open("datos_R/dict_images_r", "rb")
+fichero = open(datos + "/dict_images_r", "rb")
 # Se cargan los datos obtenidos del procesamiento de las imagenes R
 dict_images_r = pickle.load(fichero) 
 

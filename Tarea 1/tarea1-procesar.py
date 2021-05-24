@@ -48,7 +48,8 @@ for image_path in os.listdir(dataset_r):
     para poder utilizar su contenido en el archivo de busqueda.
     Para llevar a cabo esto se utiliza la libreria *pickle*.
 '''
-fichero_binario = open("datos_R/dict_images_r", "wb") # se crea el fichero
+# fichero_binario = open("datos_R/dict_images_r", "wb") # se crea el fichero
+fichero_binario = open(datos + "/dict_images_r", "wb") # se crea el fichero
 # Se "vuelca" la informacion del diccionario en el fichero
 pickle.dump(dict_images_r, fichero_binario)
 

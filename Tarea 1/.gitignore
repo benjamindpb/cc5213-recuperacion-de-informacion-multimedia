@@ -1,7 +1,9 @@
 dataset_a/
 dataset_b/
 dataset_c/
-datos_R/
+datos_dataset_a/
+datos_dataset_b/
+datos_dataset_c/
 .vscode
 1_tarea1.pdf
 
@@ -9,6 +11,7 @@ resultados_dataset_a.txt
 resultados_dataset_b.txt
 resultados_dataset_c.txt
 resultados.txt
+logs_benjamin_del_pino.txt
 
 Tarea\ 1.zip
 
