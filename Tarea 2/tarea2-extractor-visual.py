@@ -18,3 +18,8 @@ if not os.path.isdir(carpeta_entrada):
 #  calcular una matriz de descriptores de N filas por d columnas (d=dimension del descriptor)
 #  crear directorio: os.mkdir(carpeta_salida)
 #  escribir matriz descriptores en carpeta_salida/archivo
+
+for video_path in os.listdir(carpeta_entrada):
+    
+    
+    break
