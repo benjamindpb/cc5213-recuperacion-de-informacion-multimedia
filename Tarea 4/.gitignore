@@ -2,6 +2,7 @@ datos_entrenamiento
 datos_test
 
 *.zip
+*.h5
 
 MD5SUM
 
