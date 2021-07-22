@@ -3,11 +3,7 @@ dataset_b/
 dataset_c/
 carpeta_salida/
 
-dataset_a.zip
-dataset_b.zip
-dataset_c.zip
-02.zip
-
-
+*.zip
+*.txt 
 
 tarea2.pdf
